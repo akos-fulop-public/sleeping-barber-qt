@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 11)
 
 message("${CMAKE_GENERATOR}")
 
-find_package(Qt6 REQUIRED COMPONENTS Core)
+find_package(Qt6 COMPONENTS Core Test REQUIRED)
 enable_testing()
 add_subdirectory(src)
 add_subdirectory(test)
