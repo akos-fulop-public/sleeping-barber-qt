@@ -5,20 +5,28 @@
 
 #include <customerSpawner.h>
 
-TEST(CustomerSpawnerTest, spawnOneCustomer)
+class CustomerSpawnerTest : public ::testing::Test {
+public:
+    CustomerSpawnerTest():
+        spawner(nullptr, 10),
+        spy(&spawner, &CustomerSpawner::customerArrives)
+    {}
+protected:
+    CustomerSpawner spawner;
+    QSignalSpy spy;
+};
+
+
+TEST_F(CustomerSpawnerTest, spawnOneCustomer)
 {
-    CustomerSpawner spawner(nullptr, 10);
-    QSignalSpy spy(&spawner, SIGNAL(customerArrives()));
     EXPECT_EQ(spy.count(), 0);
     spawner.startSpawning();
     spy.wait(2000);
     EXPECT_EQ(spy.count(), 1);
 }
 
-TEST(CustomerSpawnerTest, spawnTwoCustomers)
+TEST_F(CustomerSpawnerTest, spawnTwoCustomers)
 {
-    CustomerSpawner spawner(nullptr, 10);
-    QSignalSpy spy(&spawner, SIGNAL(customerArrives()));
     EXPECT_EQ(spy.count(), 0);
     spawner.startSpawning();
     spy.wait(2000);
@@ -27,10 +35,8 @@ TEST(CustomerSpawnerTest, spawnTwoCustomers)
     EXPECT_EQ(spy.count(), 2);
 }
 
-TEST(CustomerSpawnerTest, stopSpawning)
+TEST_F(CustomerSpawnerTest, stopSpawning)
 {
-    CustomerSpawner spawner(nullptr, 10);
-    QSignalSpy spy(&spawner, SIGNAL(customerArrives()));
     EXPECT_EQ(spy.count(), 0);
     spawner.startSpawning();
     spy.wait(2000);
