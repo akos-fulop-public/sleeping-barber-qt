@@ -1,14 +1,14 @@
 #include "customerSpawner.h"
-#include <QTimer>
-
 
 CustomerSpawner::CustomerSpawner(QObject* parent, quint64 msec) :
-    QObject(parent),
-    timer_intervall(msec)
-{}
+    QObject(parent)
+{
+    connect(&timer, &QTimer::timeout, this, &CustomerSpawner::customerArrives_slot);
+    timer.setInterval(msec);
+}
 
 void CustomerSpawner::startSpawning() {
-    QTimer::singleShot(timer_intervall, this, &CustomerSpawner::customerArrives_slot);
+    timer.start();
 }
 
 void CustomerSpawner::customerArrives_slot() {

@@ -1,4 +1,5 @@
 #include <QObject>
+#include <QTimer>
 
 class CustomerSpawner : public QObject {
     Q_OBJECT;
@@ -13,5 +14,5 @@ signals:
     void customerArrives();
 
 private:
-    quint64 timer_intervall;
+    QTimer timer;
 };
