@@ -7,6 +7,7 @@ public:
     CustomerSpawner(QObject* parent = nullptr, quint64 msec = 2000);
 public slots:
     void startSpawning();
+    void stopSpawning();
 private slots:
     void customerArrives_slot();
 

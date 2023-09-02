@@ -11,6 +11,10 @@ void CustomerSpawner::startSpawning() {
     timer.start();
 }
 
+void CustomerSpawner::stopSpawning() {
+    timer.stop();
+}
+
 void CustomerSpawner::customerArrives_slot() {
     emit customerArrives();
 }
