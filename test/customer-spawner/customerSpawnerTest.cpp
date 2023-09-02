@@ -8,7 +8,7 @@
 class CustomerSpawnerTest : public ::testing::Test {
 public:
     CustomerSpawnerTest():
-        spawner(nullptr, 10),
+        spawner(nullptr, 10, 20),
         spy(&spawner, &CustomerSpawner::customerArrives)
     {}
 protected:
