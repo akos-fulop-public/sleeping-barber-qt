@@ -3,8 +3,7 @@
 class CustomerSpawner : public QObject {
     Q_OBJECT;
 public:
-    CustomerSpawner(QObject*parent = nullptr) : QObject(parent)
-    {}
+    CustomerSpawner(QObject* parent = nullptr, quint64 msec = 2000);
 public slots:
     void startSpawning();
 private slots:
@@ -12,4 +11,7 @@ private slots:
 
 signals:
     void customerArrives();
+
+private:
+    quint64 timer_intervall;
 };
