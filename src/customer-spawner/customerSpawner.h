@@ -1,5 +1,6 @@
 #include <QObject>
 #include <QTimer>
+#include <QRandomGenerator>
 
 class CustomerSpawner : public QObject {
     Q_OBJECT;
@@ -14,6 +15,8 @@ private slots:
 signals:
     void customerArrives();
 
+protected:
+    QRandomGenerator generator;
 private:
     QTimer timer;
 };

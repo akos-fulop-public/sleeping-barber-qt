@@ -5,6 +5,16 @@
 
 #include <customerSpawner.h>
 
+class DeterministicCustomerSpawner : public CustomerSpawner
+{
+public:
+    DeterministicCustomerSpawner(QObject* parent, quint64 min_msec, quint64 max_msec) :
+        CustomerSpawner(parent, min_msec, max_msec)
+    {
+        generator.seed(7373);
+    }
+};
+
 class CustomerSpawnerTest : public ::testing::Test {
 public:
     CustomerSpawnerTest():
@@ -12,7 +22,7 @@ public:
         spy(&spawner, &CustomerSpawner::customerArrives)
     {}
 protected:
-    CustomerSpawner spawner;
+    DeterministicCustomerSpawner spawner;
     QSignalSpy spy;
 };
 
