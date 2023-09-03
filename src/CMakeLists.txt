@@ -1,3 +1,4 @@
+add_subdirectory(barber-shop)
 add_subdirectory(customer-spawner)
 
 add_executable(app main.cpp)
