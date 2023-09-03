@@ -10,13 +10,14 @@ public slots:
     void startSpawning();
     void stopSpawning();
 private slots:
-    void customerArrives_slot();
+    void resetTimerAndFireAgain();
 
 signals:
     void customerArrives();
 
 protected:
     QRandomGenerator generator;
+    quint64 min_msec, max_msec;
 private:
     QTimer timer;
 };
