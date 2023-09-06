@@ -8,10 +8,11 @@ class BarberShop : public QObject
 Q_OBJECT;
 
 public:
-    BarberShop(quint64 numberOfChairs) : chairs(numberOfChairs, Chair::Occupied) {
+    BarberShop(quint64 numberOfChairs) : chairs(numberOfChairs, Chair::Empty) {
     }
 
 public slots:
+    void customerArrived();
     void checkForAvailableCustomers();
     void finishedWithCustomer(quint64 chairId);
 
