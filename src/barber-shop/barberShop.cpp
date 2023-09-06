@@ -16,5 +16,5 @@ void BarberShop::checkForAvailableCustomers() {
 }
 
 void BarberShop::finishedWithCustomer(quint64 chairId) {
-
+    chairs[chairId] = Chair::Empty;
 }

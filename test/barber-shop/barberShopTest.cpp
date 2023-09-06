@@ -58,6 +58,18 @@ TEST_F(BarberShopTest, shopFull) {
     }
     EXPECT_EQ(availableSpy.count(), 2);
     EXPECT_EQ(unavailableSpy.count(), 1);
+    quint64 firstChairId = qvariant_cast<quint64>(availableSpy.at(0).at(0));
+    quint64 secondChairId = qvariant_cast<quint64>(availableSpy.at(1).at(0));
+    emit shop.finishedWithCustomer(firstChairId);
+    emit shop.finishedWithCustomer(secondChairId);
+    for (auto i = 0 ; i < 3 ; ++i) {
+        emit shop.customerArrived();
+    }
+    for (auto i = 0 ; i < 3 ; ++i) {
+        emit shop.checkForAvailableCustomers();
+    }
+    EXPECT_EQ(availableSpy.count(), 4);
+    EXPECT_EQ(unavailableSpy.count(), 2);
 }
 
 int main(int argc, char **argv) {
