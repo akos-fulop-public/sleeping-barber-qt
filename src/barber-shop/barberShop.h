@@ -18,6 +18,7 @@ public slots:
 
 signals:
     void customerAvailable(quint64 chairId);
+    void customerUnavailable();
 
 private:
     QList<Chair> chairs;

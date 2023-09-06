@@ -8,6 +8,7 @@ void BarberShop::customerArrived() {
 void BarberShop::checkForAvailableCustomers() {
     auto availableSeat = chairs.indexOf(Chair::Occupied);
     if (availableSeat == -1) {
+        emit customerUnavailable();
         return;
     }
     chairs[availableSeat] = Chair::InProgress;

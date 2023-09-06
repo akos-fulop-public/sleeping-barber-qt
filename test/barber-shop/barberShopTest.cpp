@@ -8,41 +8,44 @@ class BarberShopTest : public ::testing::Test {
 public:
     BarberShopTest():
         shop(2),
-        spy(&shop, &BarberShop::customerAvailable)
+        availableSpy(&shop, &BarberShop::customerAvailable),
+        unavailableSpy(&shop, &BarberShop::customerUnavailable)
     {}
 protected:
     BarberShop shop;
-    QSignalSpy spy;
+    QSignalSpy availableSpy, unavailableSpy;
 };
 
 TEST_F(BarberShopTest, customersAvailable) {
     emit shop.customerArrived();
-    EXPECT_EQ(spy.count(), 0);
+    EXPECT_EQ(availableSpy.count(), 0);
     emit shop.checkForAvailableCustomers();
-    spy.wait(200);
-    EXPECT_EQ(spy.count(), 1);
+    availableSpy.wait(200);
+    EXPECT_EQ(availableSpy.count(), 1);
 }
 
 TEST_F(BarberShopTest, customerUnavailable) {
-    EXPECT_EQ(spy.count(), 0);
+    EXPECT_EQ(availableSpy.count(), 0);
+    EXPECT_EQ(unavailableSpy.count(), 0);
     emit shop.checkForAvailableCustomers();
-    spy.wait(200);
-    EXPECT_EQ(spy.count(), 0);
+    availableSpy.wait(200);
+    EXPECT_EQ(availableSpy.count(), 0);
+    EXPECT_EQ(unavailableSpy.count(), 1);
 }
 
 TEST_F(BarberShopTest, availableCustomerChairIdsIncrease) {
     emit shop.customerArrived();
     emit shop.customerArrived();
-    EXPECT_EQ(spy.count(), 0);
+    EXPECT_EQ(availableSpy.count(), 0);
     emit shop.checkForAvailableCustomers();
-    spy.wait(200);
-    EXPECT_EQ(spy.count(), 1);
-    quint64 firstChairId = qvariant_cast<quint64>(spy.at(0).at(0));
+    availableSpy.wait(200);
+    EXPECT_EQ(availableSpy.count(), 1);
+    quint64 firstChairId = qvariant_cast<quint64>(availableSpy.at(0).at(0));
     qDebug() << firstChairId;
     emit shop.checkForAvailableCustomers();
-    spy.wait(200);
-    EXPECT_EQ(spy.count(), 2);
-    quint64 secondChairId = qvariant_cast<quint64>(spy.at(1).at(0));
+    availableSpy.wait(200);
+    EXPECT_EQ(availableSpy.count(), 2);
+    quint64 secondChairId = qvariant_cast<quint64>(availableSpy.at(1).at(0));
     EXPECT_NE(firstChairId, secondChairId);
 }
 
@@ -53,7 +56,8 @@ TEST_F(BarberShopTest, shopFull) {
     for (auto i = 0 ; i < 3 ; ++i) {
         emit shop.checkForAvailableCustomers();
     }
-    EXPECT_EQ(spy.count(), 2);
+    EXPECT_EQ(availableSpy.count(), 2);
+    EXPECT_EQ(unavailableSpy.count(), 1);
 }
 
 int main(int argc, char **argv) {
