@@ -7,6 +7,7 @@
 class BarberShopTest : public ::testing::Test {
 public:
     BarberShopTest():
+        shop(3),
         spy(&shop, &BarberShop::customerAvailable)
     {}
 protected:

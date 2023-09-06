@@ -1,5 +1,11 @@
 #include "barberShop.h"
 
 void BarberShop::checkForAvailableCustomers() {
-    emit customerAvailable(chairCounter++);
+    auto availableSeat = chairs.indexOf(Chair::Occupied);
+    chairs[availableSeat] = Chair::InProgress;
+    emit customerAvailable(availableSeat);
+}
+
+void BarberShop::finishedWithCustomer(quint64 chairId) {
+
 }

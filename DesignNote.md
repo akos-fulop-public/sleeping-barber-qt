@@ -12,7 +12,7 @@ owns the eventloop. Owns array of chairs.
 checks for empty chairs, has customer sit, or increase missedCustomers counter
 #### checkForAvailableCustomers
 checks for waiting customers, emits customerAvailable if there is one, otherwise emits noCustomerAvailable
-#### customerFinished (chair id)
+#### finishedWithCustomer (chair id)
 empties char with id, increases servicedCustomers counter
 #### close
 stops customer spawner, prints final info, stops eventloop and exits the program
