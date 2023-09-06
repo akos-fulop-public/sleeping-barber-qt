@@ -11,6 +11,8 @@ public:
     BarberShop(quint64 numberOfChairs) : chairs(numberOfChairs, Chair::Empty) {
     }
 
+    const quint64 getServicedCustomers();
+
 public slots:
     void customerArrived();
     void checkForAvailableCustomers();
@@ -22,4 +24,5 @@ signals:
 
 private:
     QList<Chair> chairs;
+    quint64 servicedCustomers{0};
 };

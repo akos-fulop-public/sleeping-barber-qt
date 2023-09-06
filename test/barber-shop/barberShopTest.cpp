@@ -22,6 +22,11 @@ TEST_F(BarberShopTest, customersAvailable) {
     emit shop.checkForAvailableCustomers();
     availableSpy.wait(200);
     EXPECT_EQ(availableSpy.count(), 1);
+    EXPECT_EQ(shop.getServicedCustomers(), 0);
+    quint64 firstChairId = qvariant_cast<quint64>(availableSpy.at(0).at(0));
+    EXPECT_EQ(shop.getServicedCustomers(), 0);
+    emit shop.finishedWithCustomer(firstChairId);
+    EXPECT_EQ(shop.getServicedCustomers(), 1);
 }
 
 TEST_F(BarberShopTest, customerUnavailable) {
