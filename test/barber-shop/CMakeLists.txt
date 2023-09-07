@@ -1,3 +1,5 @@
+add_subdirectory(barber)
+
 add_executable(barberShopTest barberShopTest.cpp)
 target_link_libraries(barberShopTest
     PRIVATE GTest::GTest

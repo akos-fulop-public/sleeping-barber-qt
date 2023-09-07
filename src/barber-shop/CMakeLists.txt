@@ -1,3 +1,5 @@
+add_subdirectory(barber)
+
 add_library(barber-shop STATIC barberShop.cpp)
 
 target_link_libraries(barber-shop PUBLIC Qt6::Core)
