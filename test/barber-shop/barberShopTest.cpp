@@ -67,6 +67,7 @@ TEST_F(BarberShopTest, shopFull) {
     quint64 secondChairId = qvariant_cast<quint64>(availableSpy.at(1).at(0));
     emit shop.finishedWithCustomer(firstChairId);
     emit shop.finishedWithCustomer(secondChairId);
+    EXPECT_EQ(shop.getMissedCustomers(), 1);
     for (auto i = 0 ; i < 3 ; ++i) {
         emit shop.customerArrived();
     }
@@ -75,6 +76,8 @@ TEST_F(BarberShopTest, shopFull) {
     }
     EXPECT_EQ(availableSpy.count(), 4);
     EXPECT_EQ(unavailableSpy.count(), 2);
+    EXPECT_EQ(shop.getServicedCustomers(), 2);
+    EXPECT_EQ(shop.getMissedCustomers(), 2);
 }
 
 int main(int argc, char **argv) {

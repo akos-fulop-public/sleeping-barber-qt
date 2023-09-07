@@ -4,8 +4,16 @@ const quint64 BarberShop::getServicedCustomers() {
     return servicedCustomers;
 }
 
+const quint64 BarberShop::getMissedCustomers() {
+    return missedCustomers;
+}
+
 void BarberShop::customerArrived() {
     auto availableSeat = chairs.indexOf(Chair::Empty);
+    if (availableSeat == -1) {
+        ++missedCustomers;
+        return;
+    }
     chairs[availableSeat] = Chair::Occupied;
 }
 

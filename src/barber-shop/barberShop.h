@@ -12,6 +12,7 @@ public:
     }
 
     const quint64 getServicedCustomers();
+    const quint64 getMissedCustomers();
 
 public slots:
     void customerArrived();
@@ -25,4 +26,5 @@ signals:
 private:
     QList<Chair> chairs;
     quint64 servicedCustomers{0};
+    quint64 missedCustomers{0};
 };
