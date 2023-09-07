@@ -18,6 +18,7 @@ public slots:
     void customerArrived();
     void checkForAvailableCustomers();
     void finishedWithCustomer(quint64 chairId);
+    void printState();
 
 signals:
     void customerAvailable(quint64 chairId);
