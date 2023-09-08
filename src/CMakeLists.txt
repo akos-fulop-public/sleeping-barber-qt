@@ -6,4 +6,5 @@ add_executable(app main.cpp)
 target_link_libraries(app
     PRIVATE Qt6::Core
     PRIVATE barber-shop
-    PRIVATE customerSpawner)
+    PRIVATE customerSpawner
+    PRIVATE barber)
