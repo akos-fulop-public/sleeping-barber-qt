@@ -32,12 +32,12 @@ stops the timer
 ## Barber
 
 ### signals
-#### customerFinished (chair id)
+#### finishedWithCustomer
 #### checkForCustomers
 #### closeShop
 
 ### slots
 #### startWorkingOnCustomer
-starts the worktime timer, emits customerFinished when ready, then emits checkForCustomers
+starts the worktime timer, emits finishedWithCustomer when ready, then emits checkForCustomers
 #### goToSleep
 emits closeShop
