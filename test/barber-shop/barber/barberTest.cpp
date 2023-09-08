@@ -15,17 +15,23 @@ protected:
 };
 
 TEST_F(BarberTest, workOnCustomer) {
-    barber.startWorkingOnCustomer();
+    const auto expectedChairId{1};
+    barber.startWorkingOnCustomer(expectedChairId);
     spy.wait(200);
     EXPECT_EQ(spy.count(), 1);
+    quint64 chairId = qvariant_cast<quint64>(spy.at(0).at(0));
+    EXPECT_EQ(chairId, expectedChairId);
 }
 
 TEST_F(BarberTest, customerNotReady) {
-    barber.startWorkingOnCustomer();
+    const auto expectedChairId{4};
+    barber.startWorkingOnCustomer(expectedChairId);
     spy.wait(10);
     EXPECT_EQ(spy.count(), 0);
     spy.wait(200);
     EXPECT_EQ(spy.count(), 1);
+    quint64 chairId = qvariant_cast<quint64>(spy.at(0).at(0));
+    EXPECT_EQ(chairId, expectedChairId);
 }
 
 int main(int argc, char **argv) {
