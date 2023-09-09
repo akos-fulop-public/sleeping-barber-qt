@@ -1,5 +1,8 @@
 #include <QTextStream>
 #include <QCoreApplication>
+#include <QCommandLineParser>
+
+#include <QCommandLineOption>
 #include <QObject>
 #include <QTimer>
 
@@ -9,9 +12,27 @@
 
 int main(int argc, char* argv[]) {
     QCoreApplication app(argc, argv);
-    BarberShop shop(5);
+    QCoreApplication::setApplicationName("sleeping-barber");
+    QCoreApplication::setApplicationVersion("1.0");
+    QCommandLineParser parser;
+    parser.setApplicationDescription("Example implementation of the Sleeping Barber Problem");
+    parser.addHelpOption();
+    parser.addVersionOption();
+    QCommandLineOption chairOption{{"c", "chairs"}, "Number of <chairs> in the Barber Shop.","chairs"};
+    QCommandLineOption workOption{{"w", "work"}, "Number of miliseconds it takes the Barber to <work>.","work"};
+    parser.addOptions({chairOption, workOption});
+    parser.process(app);
+    auto numberOfChairs = 5;
+    if (parser.isSet(chairOption)) {
+        numberOfChairs = parser.value(chairOption).toULongLong();
+    }
+    auto workIntervall = 3500;
+    if (parser.isSet(workOption)) {
+        workIntervall = parser.value(workOption).toULongLong();
+    }
+    BarberShop shop(numberOfChairs);
     CustomerSpawner spawner(&app, 2000, 6000);
-    Barber barber(3500);
+    Barber barber(workIntervall);
     QTimer printTimer;
     QObject::connect(&shop, &BarberShop::customerAvailable, &barber, &Barber::startWorkingOnCustomer);
     QObject::connect(&barber, &Barber::finishedWithCustomer, &shop, &BarberShop::finishedWithCustomer);
