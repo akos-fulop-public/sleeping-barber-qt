@@ -1,0 +1,11 @@
+name: 'Test Workflow'
+on:
+  push:
+    branches:
+      - master
+jobs:
+  example:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
