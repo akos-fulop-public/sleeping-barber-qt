@@ -20,7 +20,9 @@ int main(int argc, char* argv[]) {
     parser.addVersionOption();
     QCommandLineOption chairOption{{"c", "chairs"}, "Number of <chairs> in the Barber Shop.","chairs"};
     QCommandLineOption workOption{{"w", "work"}, "Number of miliseconds it takes the Barber to <work>.","work"};
-    parser.addOptions({chairOption, workOption});
+    QCommandLineOption minSpawnerOption{{"m", "minimum"}, "The <minimum> number of miliseconds it takes a new customer to arrive.","min"};
+    QCommandLineOption maxSpawnerOption{{"M", "maximum"}, "The <maximum> number of miliseconds it takes a new customer to arrive.","max"};
+    parser.addOptions({chairOption, workOption, minSpawnerOption, maxSpawnerOption});
     parser.process(app);
     auto numberOfChairs = 5;
     if (parser.isSet(chairOption)) {
@@ -30,8 +32,17 @@ int main(int argc, char* argv[]) {
     if (parser.isSet(workOption)) {
         workIntervall = parser.value(workOption).toULongLong();
     }
+    auto minIntervall = 2000;
+    if (parser.isSet(minSpawnerOption)) {
+        minIntervall = parser.value(minSpawnerOption).toULongLong();
+    }
+    auto maxIntervall = 6000;
+    if(parser.isSet(maxSpawnerOption)) {
+        maxIntervall = parser.value(maxSpawnerOption).toULongLong();    
+    }
+
     BarberShop shop(numberOfChairs);
-    CustomerSpawner spawner(&app, 2000, 6000);
+    CustomerSpawner spawner(&app, minIntervall, maxIntervall);
     Barber barber(workIntervall);
     QTimer printTimer;
     QObject::connect(&shop, &BarberShop::customerAvailable, &barber, &Barber::startWorkingOnCustomer);
