@@ -15,5 +15,9 @@ jobs:
       - name: Setup build directory
         run: mkdir build
         working-directory: .
-      - name: Check CMake
-        run: cmake --version
+      - name: Configure
+        run: cmake ..
+      - name: Build
+        run: cmake --build .
+      - name: Run unit tests
+        run: ctest --output-on-failure
