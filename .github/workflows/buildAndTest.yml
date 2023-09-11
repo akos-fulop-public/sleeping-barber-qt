@@ -1,11 +1,19 @@
-name: 'Test Workflow'
+name: 'Build and Test Workflow'
 on:
   push:
     branches:
       - master
 jobs:
-  example:
+  build-and-test:
     runs-on: ubuntu-22.04
+    defaults:
+      run:
+        working-directory: ./build
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Setup build directory
+        run: mkdir build
+        working-directory: .
+      - name: Check CMake
+        run: cmake --version
