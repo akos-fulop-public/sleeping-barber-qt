@@ -8,3 +8,5 @@ target_link_libraries(app
     PRIVATE barber-shop
     PRIVATE customerSpawner
     PRIVATE barber)
+
+install(TARGETS app DESTINATION ".")
