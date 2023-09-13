@@ -1,7 +1,5 @@
-#include <QTextStream>
 #include <QCoreApplication>
 #include <QCommandLineParser>
-
 #include <QCommandLineOption>
 #include <QObject>
 #include <QTimer>
@@ -55,7 +53,6 @@ int main(int argc, char* argv[]) {
     QObject::connect(&barber, &Barber::finishedWithCustomer, [&]() {
         emit shop.checkForAvailableCustomers();
     });
-    QTextStream(stdout) << "Hello World!" << Qt::endl;
     emit spawner.startSpawning();
     printTimer.start(1000);
     emit shop.checkForAvailableCustomers();
