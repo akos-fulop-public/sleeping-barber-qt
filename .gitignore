@@ -4,6 +4,7 @@
 ### Custom ###
 # Out of source folder
 build/*
+aritfact/*
 
 ### C++ ###
 # Prerequisites
