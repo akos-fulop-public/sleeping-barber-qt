@@ -11,7 +11,7 @@
 int main(int argc, char* argv[]) {
     QCoreApplication app(argc, argv);
     QCoreApplication::setApplicationName("sleeping-barber");
-    QCoreApplication::setApplicationVersion("1.0");
+    QCoreApplication::setApplicationVersion("1.0.0");
     QCommandLineParser parser;
     parser.setApplicationDescription("Example implementation of the Sleeping Barber Problem");
     parser.addHelpOption();
