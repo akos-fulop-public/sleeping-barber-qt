@@ -6,7 +6,7 @@ There is a barbershop with a number of barber's chairs. When a customer arrives,
 
 ## Specifications
 
-Any time units below are to be interpreted in whole seconds.
-The number of chairs in the shop must be parameterized.
-The customers arrive at random times. The minimum and the maximum of the range must be parameterized, the distribution must be linear.
-The time it takes to sevice a customer must be parameterized.
+- Any time units below are to be interpreted in whole seconds.
+- The number of chairs in the shop must be parameterized.
+- The customers arrive at random times. The minimum and the maximum of the range must be parameterized, the distribution must be linear.
+- The time it takes to sevice a customer must be parameterized.
