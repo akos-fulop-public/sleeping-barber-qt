@@ -5,13 +5,11 @@
 
 #include <customerSpawner.h>
 
-class DeterministicCustomerSpawner : public CustomerSpawner
-{
+class DeterministicCustomerSpawner : public CustomerSpawner {
 public:
     DeterministicCustomerSpawner(QObject* parent, quint64 min_msec, quint64 max_msec) :
-        CustomerSpawner(parent, min_msec, max_msec)
-    {
-        generator.seed(7373); //sequence for bounded(10, 20): 12 13 18 18 19 19 13
+        CustomerSpawner(parent, min_msec, max_msec) {
+        generator.seed(7373);  // sequence for bounded(10, 20): 12 13 18 18 19 19 13
     }
 };
 
@@ -27,16 +25,14 @@ protected:
 };
 
 
-TEST_F(CustomerSpawnerTest, spawnOneCustomer)
-{
+TEST_F(CustomerSpawnerTest, spawnOneCustomer) {
     EXPECT_EQ(spy.count(), 0);
     spawner.startSpawning();
     spy.wait(13);
     EXPECT_EQ(spy.count(), 1);
 }
 
-TEST_F(CustomerSpawnerTest, spawnTwoCustomers)
-{
+TEST_F(CustomerSpawnerTest, spawnTwoCustomers) {
     EXPECT_EQ(spy.count(), 0);
     spawner.startSpawning();
     spy.wait(13);
@@ -45,8 +41,7 @@ TEST_F(CustomerSpawnerTest, spawnTwoCustomers)
     EXPECT_EQ(spy.count(), 2);
 }
 
-TEST_F(CustomerSpawnerTest, waitLessTimeThanNeeded)
-{
+TEST_F(CustomerSpawnerTest, waitLessTimeThanNeeded) {
     EXPECT_EQ(spy.count(), 0);
     spawner.startSpawning();
     spy.wait(13);
@@ -58,8 +53,7 @@ TEST_F(CustomerSpawnerTest, waitLessTimeThanNeeded)
 }
 
 
-TEST_F(CustomerSpawnerTest, stopSpawning)
-{
+TEST_F(CustomerSpawnerTest, stopSpawning) {
     EXPECT_EQ(spy.count(), 0);
     spawner.startSpawning();
     spy.wait(13);

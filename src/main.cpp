@@ -16,10 +16,10 @@ int main(int argc, char* argv[]) {
     parser.setApplicationDescription("Example implementation of the Sleeping Barber Problem");
     parser.addHelpOption();
     parser.addVersionOption();
-    QCommandLineOption chairOption{{"c", "chairs"}, "Number of <chairs> in the Barber Shop.","chairs"};
-    QCommandLineOption workOption{{"w", "work"}, "Number of miliseconds it takes the Barber to <work>.","work"};
-    QCommandLineOption minSpawnerOption{{"m", "minimum"}, "The <minimum> number of miliseconds it takes a new customer to arrive.","min"};
-    QCommandLineOption maxSpawnerOption{{"M", "maximum"}, "The <maximum> number of miliseconds it takes a new customer to arrive.","max"};
+    QCommandLineOption chairOption{{"c", "chairs"}, "Number of <chairs> in the Barber Shop.", "chairs"};
+    QCommandLineOption workOption{{"w", "work"}, "Number of miliseconds it takes the Barber to <work>.", "work"};
+    QCommandLineOption minSpawnerOption{{"m", "minimum"}, "The <minimum> number of miliseconds it takes a new customer to arrive.", "min"};
+    QCommandLineOption maxSpawnerOption{{"M", "maximum"}, "The <maximum> number of miliseconds it takes a new customer to arrive.", "max"};
     parser.addOptions({chairOption, workOption, minSpawnerOption, maxSpawnerOption});
     parser.process(app);
     auto numberOfChairs = 5;
@@ -35,8 +35,8 @@ int main(int argc, char* argv[]) {
         minIntervall = parser.value(minSpawnerOption).toULongLong();
     }
     auto maxIntervall = 6000;
-    if(parser.isSet(maxSpawnerOption)) {
-        maxIntervall = parser.value(maxSpawnerOption).toULongLong();    
+    if (parser.isSet(maxSpawnerOption)) {
+        maxIntervall = parser.value(maxSpawnerOption).toULongLong();
     }
 
     BarberShop shop(numberOfChairs);
