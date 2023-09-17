@@ -1,5 +1,6 @@
-#include <QObject>
+#pragma once
 
+#include <QObject>
 #include <QTimer>
 
 class Barber : public QObject {

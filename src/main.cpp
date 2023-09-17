@@ -1,7 +1,7 @@
+#include <QObject>
 #include <QCoreApplication>
 #include <QCommandLineParser>
 #include <QCommandLineOption>
-#include <QObject>
 #include <QTimer>
 
 #include <barberShop.h>

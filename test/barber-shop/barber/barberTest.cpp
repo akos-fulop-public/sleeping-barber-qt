@@ -1,8 +1,9 @@
+#include <barber.h>
+
 #include <gtest/gtest.h>
+
 #include <QCoreApplication>
 #include <QSignalSpy>
-
-#include <barber.h>
 
 class BarberTest : public ::testing::Test {
 public:

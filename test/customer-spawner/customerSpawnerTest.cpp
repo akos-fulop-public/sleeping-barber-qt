@@ -1,9 +1,9 @@
+#include <customerSpawner.h>
+
 #include <gtest/gtest.h>
 
 #include <QCoreApplication>
 #include <QSignalSpy>
-
-#include <customerSpawner.h>
 
 class DeterministicCustomerSpawner : public CustomerSpawner {
 public:
