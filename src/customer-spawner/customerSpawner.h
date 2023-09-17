@@ -1,23 +1,25 @@
+#pragma once
+
 #include <QObject>
 #include <QTimer>
 #include <QRandomGenerator>
 
 class CustomerSpawner : public QObject {
-    Q_OBJECT;
+	Q_OBJECT;
 public:
-    CustomerSpawner(QObject* parent = nullptr, quint64 min_msec = 2000, quint64 max_msec = 10'000);
+	CustomerSpawner(QObject* parent = nullptr, quint64 min_msec = 2000, quint64 max_msec = 10'000);
 public slots:
-    void startSpawning();
-    void stopSpawning();
+	void startSpawning();
+	void stopSpawning();
 private slots:
-    void resetTimerAndFireAgain();
+	void resetTimerAndFireAgain();
 
 signals:
-    void customerArrives();
+	void customerArrives();
 
 protected:
-    QRandomGenerator generator;
-    quint64 min_msec, max_msec;
+	QRandomGenerator generator;
+	quint64 min_msec, max_msec;
 private:
-    QTimer timer;
+	QTimer timer;
 };

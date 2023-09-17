@@ -2,16 +2,16 @@
 
 #include <QDebug>
 
-Barber::Barber(quint64 workTimeMsec) {
-    workTimer.setInterval(workTimeMsec);
-    workTimer.setSingleShot(true);
-    connect(&workTimer, &QTimer::timeout, [=] () {
-        emit finishedWithCustomer(currentChairId);
-    });
+Barber::Barber(quint64 work_time_msec) {
+	work_timer.setInterval(work_time_msec);
+	work_timer.setSingleShot(true);
+	connect(&work_timer, &QTimer::timeout, [=] () {
+		emit finishedWithCustomer(current_chair_id);
+	});
 }
 
-void Barber::startWorkingOnCustomer(quint64 chairId) {
-    qDebug() << __FUNCTION__ << "called with" << chairId;
-    currentChairId = chairId;
-    workTimer.start();
+void Barber::startWorkingOnCustomer(quint64 chair_id) {
+	qDebug() << __FUNCTION__ << "called with" << chair_id;
+	current_chair_id = chair_id;
+	work_timer.start();
 }

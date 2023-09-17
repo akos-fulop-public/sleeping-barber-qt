@@ -2,7 +2,7 @@ FROM ubuntu:22.04 AS build
 
 RUN apt update && \
 DEBIAN_FRONTEND=noninteractive apt update -y && \
-DEBIAN_FRONTEND=noninteractive apt install -y cmake build-essential qt6-base-dev libgtest-dev
+DEBIAN_FRONTEND=noninteractive apt install -y cmake build-essential qt6-base-dev libgtest-dev cpplint
 
 WORKDIR /build
 

@@ -1,3 +1,5 @@
+#pragma once
+
 #include <QObject>
 #include <QList>
 
@@ -8,24 +10,24 @@ class BarberShop : public QObject
 Q_OBJECT;
 
 public:
-    BarberShop(quint64 numberOfChairs) : chairs(numberOfChairs, Chair::Empty) {
-    }
+	BarberShop(quint64 number_of_chairs) : chairs(number_of_chairs, Chair::Empty) {
+	}
 
-    const quint64 getServicedCustomers();
-    const quint64 getMissedCustomers();
+	const quint64 getServicedCustomers();
+	const quint64 getMissedCustomers();
 
 public slots:
-    void customerArrived();
-    void checkForAvailableCustomers();
-    void finishedWithCustomer(quint64 chairId);
-    void printState();
+	void customerArrived();
+	void checkForAvailableCustomers();
+	void finishedWithCustomer(quint64 chair_id);
+	void printState();
 
 signals:
-    void customerAvailable(quint64 chairId);
-    void customerUnavailable();
+	void customerAvailable(quint64 chair_id);
+	void customerUnavailable();
 
 private:
-    QList<Chair> chairs;
-    quint64 servicedCustomers{0};
-    quint64 missedCustomers{0};
+	QList<Chair> chairs;
+	quint64 serviced_customers{0};
+	quint64 missed_customers{0};
 };
