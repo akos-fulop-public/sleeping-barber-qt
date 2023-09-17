@@ -5,41 +5,41 @@
 
 const quint64 BarberShop::getServicedCustomers() {
     qDebug() << __FUNCTION__ << "called";
-    return servicedCustomers;
+    return serviced_customers;
 }
 
 const quint64 BarberShop::getMissedCustomers() {
     qDebug() << __FUNCTION__ << "called";
-    return missedCustomers;
+    return missed_customers;
 }
 
 void BarberShop::customerArrived() {
     qDebug() << __FUNCTION__ << "called";
-    auto availableSeat = chairs.indexOf(Chair::Empty);
-    if (availableSeat == -1) {
-        ++missedCustomers;
+    auto available_seat = chairs.indexOf(Chair::Empty);
+    if (available_seat == -1) {
+        ++missed_customers;
         return;
     }
-    chairs[availableSeat] = Chair::Occupied;
+    chairs[available_seat] = Chair::Occupied;
 }
 
 void BarberShop::checkForAvailableCustomers() {
     qDebug() << __FUNCTION__ << "called";
-    auto availableSeat = chairs.indexOf(Chair::Occupied);
-    if (availableSeat == -1) {
+    auto available_seat = chairs.indexOf(Chair::Occupied);
+    if (available_seat == -1) {
         qDebug() << __FUNCTION__ << "no customer is available";
         emit customerUnavailable();
         return;
     }
-    qDebug() << __FUNCTION__ << "customer is available at" << availableSeat;
-    chairs[availableSeat] = Chair::InProgress;
-    emit customerAvailable(availableSeat);
+    qDebug() << __FUNCTION__ << "customer is available at" << available_seat;
+    chairs[available_seat] = Chair::InProgress;
+    emit customerAvailable(available_seat);
 }
 
-void BarberShop::finishedWithCustomer(quint64 chairId) {
-    qDebug() << __FUNCTION__ << "called with" << chairId;
-    chairs[chairId] = Chair::Empty;
-    ++servicedCustomers;
+void BarberShop::finishedWithCustomer(quint64 chair_id) {
+    qDebug() << __FUNCTION__ << "called with" << chair_id;
+    chairs[chair_id] = Chair::Empty;
+    ++serviced_customers;
 }
 
 void BarberShop::printState() {
@@ -55,6 +55,6 @@ void BarberShop::printState() {
             out << "X ";
         }
     }
-    out << Qt::endl << "Serviced customers: " << servicedCustomers << Qt::endl <<
-    "Missed customers: " << missedCustomers << Qt::endl << Qt::endl;
+    out << Qt::endl << "Serviced customers: " << serviced_customers << Qt::endl <<
+    "Missed customers: " << missed_customers << Qt::endl << Qt::endl;
 }
