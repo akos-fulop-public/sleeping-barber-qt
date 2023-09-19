@@ -42,11 +42,10 @@ int main(int argc, char* argv[]) {
 	BarberShop shop(number_of_chairs);
 	CustomerSpawner spawner(&app, min_intervall, max_intervall);
 	Barber barber(work_intervall);
-	QTimer print_timer;
 	QObject::connect(&shop, &BarberShop::customerAvailable, &barber, &Barber::startWorkingOnCustomer);
 	QObject::connect(&barber, &Barber::finishedWithCustomer, &shop, &BarberShop::finishedWithCustomer);
 	QObject::connect(&shop, &BarberShop::customerUnavailable, &app, &QCoreApplication::quit);
-	QObject::connect(&print_timer, &QTimer::timeout, &shop, &BarberShop::printState);
+	QObject::connect(&shop, &BarberShop::stateChanged, &shop, &BarberShop::printState);
 	QObject::connect(&spawner, &CustomerSpawner::customerArrives, &shop, &BarberShop::customerArrived);
 	QObject::connect(&app, &QCoreApplication::aboutToQuit, &spawner, &CustomerSpawner::stopSpawning);
 	QObject::connect(&app, &QCoreApplication::aboutToQuit, &shop, &BarberShop::printState);
@@ -54,7 +53,6 @@ int main(int argc, char* argv[]) {
 		emit shop.checkForAvailableCustomers();
 	});
 	emit spawner.startSpawning();
-	print_timer.start(1000);
 	emit shop.checkForAvailableCustomers();
 	app.exec();
 	return 0;

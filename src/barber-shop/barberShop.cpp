@@ -18,9 +18,10 @@ void BarberShop::customerArrived() {
 	auto available_seat = chairs.indexOf(Chair::Empty);
 	if (available_seat == -1) {
 		++missed_customers;
-		return;
+	} else {
+		chairs[available_seat] = Chair::Occupied;
 	}
-	chairs[available_seat] = Chair::Occupied;
+	emit stateChanged();
 }
 
 void BarberShop::checkForAvailableCustomers() {
@@ -29,17 +30,19 @@ void BarberShop::checkForAvailableCustomers() {
 	if (available_seat == -1) {
 		qDebug() << __FUNCTION__ << "no customer is available";
 		emit customerUnavailable();
-		return;
+	} else {
+		qDebug() << __FUNCTION__ << "customer is available at" << available_seat;
+		chairs[available_seat] = Chair::InProgress;
+		emit customerAvailable(available_seat);
 	}
-	qDebug() << __FUNCTION__ << "customer is available at" << available_seat;
-	chairs[available_seat] = Chair::InProgress;
-	emit customerAvailable(available_seat);
+	emit stateChanged();
 }
 
 void BarberShop::finishedWithCustomer(quint64 chair_id) {
 	qDebug() << __FUNCTION__ << "called with" << chair_id;
 	chairs[chair_id] = Chair::Empty;
 	++serviced_customers;
+	emit stateChanged();
 }
 
 void BarberShop::printState() {

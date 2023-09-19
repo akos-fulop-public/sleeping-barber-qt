@@ -1,8 +1,11 @@
 name: 'Build and Test Workflow'
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
+  pull_request:
+    types: [opened, reopened, edited]
 jobs:
   build-and-test:
     runs-on: ubuntu-22.04
@@ -16,7 +19,7 @@ jobs:
         run: mkdir build
         working-directory: .
       - name: Install dependencies
-        run: sudo apt install -y qt6-base-dev libgtest-dev
+        run: sudo apt install -y qt6-base-dev libgtest-dev cpplint
       - name: Configure
         run: cmake ..
       - name: Build

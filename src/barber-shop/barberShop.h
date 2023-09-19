@@ -26,6 +26,8 @@ signals:
 	void customerAvailable(quint64 chair_id);
 	void customerUnavailable();
 
+	void stateChanged();
+
 private:
 	QList<Chair> chairs;
 	quint64 serviced_customers{0};
