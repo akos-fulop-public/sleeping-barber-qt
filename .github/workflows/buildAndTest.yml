@@ -9,6 +9,7 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-22.04
+    container: akosfulop/sleeping-barber-builder
     defaults:
       run:
         working-directory: ./build
@@ -18,8 +19,6 @@ jobs:
       - name: Setup build directory
         run: mkdir build
         working-directory: .
-      - name: Install dependencies
-        run: sudo apt install -y qt6-base-dev libgtest-dev cpplint
       - name: Configure
         run: cmake ..
       - name: Build
